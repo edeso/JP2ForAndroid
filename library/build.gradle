@@ -31,7 +31,7 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    ndkVersion = '23.2.8568313'
+    ndkVersion = "30.0.16248370"
     enableKotlin = false
 }
 

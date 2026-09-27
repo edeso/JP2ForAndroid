@@ -7,7 +7,7 @@ android {
     compileSdk = 37
     namespace = 'com.gemalto.jp2'
     defaultConfig {
-        minSdk 16
+        minSdk 21
         targetSdk 37
         versionName "1.1.0"
         versionCode 6
@@ -30,6 +30,11 @@ android {
     }
     buildFeatures {
         buildConfig = true
+    }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
     }
     ndkVersion = "30.0.16248370"
     enableKotlin = false

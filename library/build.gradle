@@ -1,5 +1,5 @@
 plugins {
-    id "com.vanniktech.maven.publish" version "0.37.0" apply(true)
+    id 'maven-publish'
 }
 apply plugin: 'com.android.library'
 
@@ -42,35 +42,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-/*************************************************************/
-/******************* PUBLISHING STUFF ************************/
-/*************************************************************/
-mavenPublishing {
-    publishToMavenCentral()
-    signAllPublications()
-    coordinates("io.github.michaldvorak-gemalto", "jp2-android", "${android.defaultConfig.versionName}")
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.edeso'
+            artifactId = 'JP2ForAndroid'
+            version = android.defaultConfig.versionName
 
-    pom {
-        name = "JP2ForAndroid"
-        description = "A JPEG-2000 image encoder/decoder for Android"
-        inceptionYear = "2019"
-        url = "https://github.com/ThalesGroup/JP2ForAndroid"
-        licenses {
-            license {
-                name = "The 2-Clause BSD License"
-                url = "https://opensource.org/licenses/BSD-2-Clause"
-                distribution = "repo"
+            afterEvaluate {
+                from components.release
             }
-        }
-        developers {
-            developer {
-                name = "Michal Dvorak"
-                url = "https://github.com/michaldvorak-gemalto"
-            }
-        }
-        scm {
-            url = "https://github.com/ThalesGroup/JP2ForAndroid"
-            connection = "scm:git:https://github.com/ThalesGroup/JP2ForAndroid.git"
         }
     }
 }
